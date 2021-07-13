@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:background="#03016b">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:weightSum="10"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:paddingStart="10dp">
+
+                    <TextView
+                        android:id="@+id/tvCity"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Washington DC"
+                        android:textColor="@color/white"
+                        android:textSize="35sp"
+                        android:textStyle="bold|italic"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/tvDegree"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="30°C"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvCity"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/tvWeatherType"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Rainy"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        android:textStyle="italic"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvDegree"
+                        android:gravity="center"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:src="@drawable/cool"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
