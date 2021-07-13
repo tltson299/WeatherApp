@@ -7,13 +7,23 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:weightSum="10"
-    android:background="#03016b">
+    android:background="#10242E"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="30sp"
+            android:textStyle="italic"
+            android:text="Wednesday, 13/07/2021"
+            android:textColor="@color/white"
+            android:gravity="center_vertical|center"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -21,12 +31,13 @@
         android:layout_height="0dp"
         android:layout_weight="3"
         android:weightSum="10"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/weather_info_custom">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="7"
+            android:layout_weight="6.5"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -43,10 +54,10 @@
                         android:id="@+id/tvCity"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Searching"
+                        android:text="Washington DC"
                         android:textColor="@color/white"
                         android:textSize="35sp"
-                        android:textStyle="bold|italic"
+
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -56,23 +67,23 @@
                         android:id="@+id/tvDegree"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="0°C"
+                        android:gravity="center"
+                        android:text="30°C, 100%"
                         android:textColor="@color/white"
-                        android:textSize="30sp"
+                        android:textSize="40sp"
                         android:textStyle="bold"
+                        app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvCity"
-                        android:gravity="center"/>
+                        app:layout_constraintTop_toBottomOf="@id/tvCity" />
 
                     <TextView
                         android:id="@+id/tvWeatherType"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Please wait"
+                        android:text="Rainy"
                         android:textColor="@color/white"
                         android:textSize="30sp"
-                        android:textStyle="italic"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvDegree"
@@ -84,38 +95,257 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3">
+            android:layout_weight="3.5">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:id="@+id/weatherIcon"
-                android:src="@drawable/finding"/>
+                android:layout_marginRight="30dp"
+                android:src="@drawable/cool"
+                android:id="@+id/imgWeatherIcon"/>
         </LinearLayout>
 
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/cityFinder"
-        android:background="@drawable/buttondesign"
-        android:layout_marginBottom="30dp">
+        android:layout_height="0dp"
+        android:layout_weight="2.5">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Search New City"
-            android:textColor="#ffffff"
-            android:textSize="16sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-    </RelativeLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/cool"
+                    android:id="@+id/imgWeatherIcon1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.5"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:textColor="@color/white"
+                    android:text="30°C, 100%"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/imgWeatherIcon1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.25"
+                    android:textSize="25sp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/tvDegree1"/>
+
+                <com.lb.auto_fit_textview.AutoResizeTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:ellipsize="none"
+                    android:maxLines="1"
+                    app:layout_constraintTop_toBottomOf="@id/tvDegree1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.25"
+                    android:textSize="25sp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:id="@+id/tvDate1"
+                    android:textColor="@color/white"
+                    android:text="18:00, 13/07"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/cool"
+                    android:id="@+id/imgWeatherIcon2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.5"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:textColor="@color/white"
+                    android:text="30°C, 100%"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/imgWeatherIcon2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.25"
+                    android:textSize="25sp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/tvDegree2"/>
+
+                <com.lb.auto_fit_textview.AutoResizeTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:ellipsize="none"
+                    android:maxLines="1"
+                    app:layout_constraintTop_toBottomOf="@id/tvDegree2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.25"
+                    android:textSize="25sp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:id="@+id/tvDate1"
+                    android:textColor="@color/white"
+                    android:text="18:00, 13/07"/>
 
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/cool"
+                    android:id="@+id/imgWeatherIcon3"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.5"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:textColor="@color/white"
+                    android:text="30°C, 100%"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/imgWeatherIcon3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.25"
+                    android:textSize="25sp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/tvDegree3"/>
+
+                <com.lb.auto_fit_textview.AutoResizeTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:ellipsize="none"
+                    android:maxLines="1"
+                    app:layout_constraintTop_toBottomOf="@id/tvDegree3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.25"
+                    android:textSize="25sp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:id="@+id/tvDate3"
+                    android:textColor="@color/white"
+                    android:text="18:00, 13/07"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/cool"
+                    android:id="@+id/imgWeatherIcon4"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.5"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:textColor="@color/white"
+                    android:text="30°C, 100%"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/imgWeatherIcon4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.25"
+                    android:textSize="25sp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/tvDegree4"/>
+
+                <com.lb.auto_fit_textview.AutoResizeTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:ellipsize="none"
+                    android:maxLines="1"
+                    app:layout_constraintTop_toBottomOf="@id/tvDegree4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.25"
+                    android:textSize="25sp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:id="@+id/tvDate4"
+                    android:textColor="@color/white"
+                    android:text="18:00, 13/07"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="SEARCH"
+            android:background="@drawable/custom_btn"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
 </LinearLayout>
