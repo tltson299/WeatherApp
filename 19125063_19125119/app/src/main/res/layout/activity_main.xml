@@ -54,7 +54,7 @@
                         android:id="@+id/tvCity"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Washington DC"
+                        android:text="Searching"
                         android:textColor="@color/white"
                         android:textSize="35sp"
 
@@ -68,7 +68,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="30°C, 100%"
+                        android:text="Please wait"
                         android:textColor="@color/white"
                         android:textSize="40sp"
                         android:textStyle="bold"
@@ -81,7 +81,7 @@
                         android:id="@+id/tvWeatherType"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Rainy"
+                        android:text="-----"
                         android:textColor="@color/white"
                         android:textSize="30sp"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/cool"
+                android:src="@drawable/finding"
                 android:id="@+id/imgWeatherIcon"/>
         </LinearLayout>
 
@@ -149,7 +149,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:ellipsize="none"
-                    android:maxLines="1"
                     app:layout_constraintTop_toBottomOf="@id/tvDegree1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -158,7 +157,8 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:id="@+id/tvDate1"
                     android:textColor="@color/white"
-                    android:text="18:00, 13/07"/>
+                    android:text="18:00, 13/07"
+                    android:singleLine="true" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -201,14 +201,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:ellipsize="none"
-                    android:maxLines="1"
                     app:layout_constraintTop_toBottomOf="@id/tvDegree2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.25"
                     android:textSize="25sp"
                     android:gravity="center_vertical|center_horizontal"
-                    android:id="@+id/tvDate1"
+                    android:id="@+id/tvDate2"
                     android:textColor="@color/white"
                     android:text="18:00, 13/07"/>
 
@@ -261,7 +260,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:ellipsize="none"
-                    android:maxLines="1"
                     app:layout_constraintTop_toBottomOf="@id/tvDegree3"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -314,7 +312,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:ellipsize="none"
-                    android:maxLines="1"
                     app:layout_constraintTop_toBottomOf="@id/tvDegree4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
