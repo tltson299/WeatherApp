@@ -13,11 +13,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.a19125063_19125119.api.ApiService;
 import com.a19125063_19125119.weathermodel.WeatherDetail;
 import com.google.gson.Gson;
-
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -83,17 +81,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        if(start)   {
+        if(start) {
             getSelectedWeatherDetail(defaultCity);
             start = false;
         }else{
             Intent intent = getIntent();
             if (intent != null) {
-                if(!(intent.getBooleanExtra("searched", false)))    {
+                if(!(intent.getBooleanExtra("searched", false))) {
                     setUpViews(new Gson().fromJson(local.getString("data", null), WeatherDetail.class));
-                }else{
-                    if(intent.getStringExtra("city") != null)  {
+                } else {
+                    if(intent.getStringExtra("city") != null) {
                         getSelectedWeatherDetail(intent.getStringExtra("city"));
                     }
                 }
@@ -101,9 +98,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setUpViews(WeatherDetail detail)   {
+    private void setUpViews(WeatherDetail detail) {
         Date now = new Date();
-
         tvNow.setText(sdfNow.format(now));
 
         tvCity.setText(detail.city.name);
@@ -135,12 +131,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void getSelectedWeatherDetail(String city) {
 
-        ApiService.apiService.getWeather(city, "metric", 5,"b9c9cb24ed8b56758aa8f6788235bd09").enqueue(new Callback<WeatherDetail>() {
+        ApiService.apiService.getWeather(city, "metric", 5,"8e8cf1deb446983e8a0bd9e743170fde").enqueue(new Callback<WeatherDetail>() {
             @Override
             public void onResponse(Call<WeatherDetail> call, Response<WeatherDetail> response) {
                 WeatherDetail detail = response.body();
-
-                if(detail == null)  {
+                if(detail == null) {
                     Log.d(TAG, "onResponse: detail = null");
                     Log.d(TAG, "onResponse: "+new Gson().fromJson(local.getString("data", null), WeatherDetail.class).city.name);
                     detail = new Gson().fromJson(local.getString("data", null), WeatherDetail.class);
@@ -149,11 +144,10 @@ public class MainActivity extends AppCompatActivity {
                     builder.setMessage("Can not find "+city+".")
                             .setPositiveButton("Ok", null)
                             .show();
-                }else   {
+                } else {
                     String data = new Gson().toJson(detail);
                     local.edit().putString("data", data).commit();
                 }
-
                 setUpViews(detail);
             }
 
@@ -162,8 +156,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("DEBUG", t.getMessage());
             }
         });
-
-
     }
 
     private static String updateWeatherIcon(int condition)
@@ -188,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
         {
             return "fog";
         }
-
         else if(condition>=772 && condition<=800)
         {
             return "overcast";
@@ -217,10 +208,7 @@ public class MainActivity extends AppCompatActivity {
         {
             return "thunderstorm1";
         }
-
-        return "dunno";
-
-
+        return "finding";
     }
 
     public void intentToWebsite(View view)   {
@@ -229,5 +217,3 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
-
-

@@ -12,8 +12,6 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    //Weather API: api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-
     Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();

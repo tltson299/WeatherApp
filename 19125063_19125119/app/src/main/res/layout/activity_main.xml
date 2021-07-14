@@ -101,8 +101,11 @@
 
                         android:ellipsize="none"
                         android:singleLine="true"/>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
             </RelativeLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -113,7 +116,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="15dp"
                 android:src="@drawable/finding"
                 android:id="@+id/imgWeatherIcon"/>
         </LinearLayout>
@@ -138,7 +141,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:src="@drawable/cool"
+                    android:src="@drawable/shower"
                     android:id="@+id/imgWeatherIcon1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -194,7 +197,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:src="@drawable/cool"
+                    android:src="@drawable/shower"
                     android:id="@+id/imgWeatherIcon2"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -232,7 +235,6 @@
                     android:textColor="@color/white"
                     android:text="18:00, 13/07"/>
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
@@ -257,7 +259,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:src="@drawable/cool"
+                    android:src="@drawable/shower"
                     android:id="@+id/imgWeatherIcon3"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -295,7 +297,6 @@
                     android:textColor="@color/white"
                     android:text="18:00, 13/07"/>
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
@@ -312,7 +313,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:src="@drawable/cool"
+                    android:src="@drawable/shower"
                     android:id="@+id/imgWeatherIcon4"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -350,7 +351,6 @@
                     android:textColor="@color/white"
                     android:text="18:00, 13/07"/>
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
@@ -370,7 +370,9 @@
             android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:id="@+id/btnSearch"/>
+            android:id="@+id/btnSearch"
+            android:layout_marginBottom="5dp"/>
 
     </LinearLayout>
+
 </LinearLayout>
