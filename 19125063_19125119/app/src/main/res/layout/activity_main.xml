@@ -15,15 +15,18 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <TextView
+        <com.lb.auto_fit_textview.AutoResizeTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:ellipsize="none"
             android:textSize="30sp"
             android:textStyle="italic"
             android:text="Wednesday, 13/07/2021"
             android:textColor="@color/white"
             android:gravity="center_vertical|center"
-            />
+            android:id="@+id/tvNow"
+            android:singleLine="true"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -32,7 +35,8 @@
         android:layout_weight="3"
         android:weightSum="10"
         android:orientation="horizontal"
-        android:background="@drawable/weather_info_custom">
+        android:background="@drawable/weather_info_custom"
+        android:onClick="intentToWebsite">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -50,9 +54,9 @@
                     android:layout_centerInParent="true"
                     android:paddingStart="10dp">
 
-                    <TextView
+                    <com.lb.auto_fit_textview.AutoResizeTextView
                         android:id="@+id/tvCity"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Searching"
                         android:textColor="@color/white"
@@ -61,11 +65,14 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:gravity="center"/>
+                        android:gravity="center"
 
-                    <TextView
+                        android:ellipsize="none"
+                        android:singleLine="true" />
+
+                    <com.lb.auto_fit_textview.AutoResizeTextView
                         android:id="@+id/tvDegree"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Please wait"
@@ -75,19 +82,25 @@
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvCity" />
+                        app:layout_constraintTop_toBottomOf="@id/tvCity"
 
-                    <TextView
+                        android:ellipsize="none"
+                        android:singleLine="true"/>
+
+                    <com.lb.auto_fit_textview.AutoResizeTextView
                         android:id="@+id/tvWeatherType"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="-----"
+                        android:text="-&#45;&#45;&#45;&#45;"
                         android:textColor="@color/white"
                         android:textSize="30sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvDegree"
-                        android:gravity="center"/>
+                        android:gravity="center"
+
+                        android:ellipsize="none"
+                        android:singleLine="true"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </RelativeLayout>
         </LinearLayout>
@@ -110,7 +123,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.5">
+        android:layout_weight="2.5"
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -131,7 +145,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.5"/>
 
-                <TextView
+                <com.lb.auto_fit_textview.AutoResizeTextView
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:textColor="@color/white"
@@ -143,7 +157,11 @@
                     app:layout_constraintHeight_percent="0.25"
                     android:textSize="25sp"
                     android:gravity="center_vertical"
-                    android:id="@+id/tvDegree1"/>
+                    android:id="@+id/tvDegree1"
+
+                    android:ellipsize="none"
+                    android:singleLine="true"/>
+
 
                 <com.lb.auto_fit_textview.AutoResizeTextView
                     android:layout_width="match_parent"
@@ -183,8 +201,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.5"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <com.lb.auto_fit_textview.AutoResizeTextView
+                  android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:textColor="@color/white"
                     android:text="30°C, 100%"
@@ -195,7 +213,10 @@
                     app:layout_constraintHeight_percent="0.25"
                     android:textSize="25sp"
                     android:gravity="center_vertical"
-                    android:id="@+id/tvDegree2"/>
+                    android:id="@+id/tvDegree2"
+
+                    android:ellipsize="none"
+                    android:singleLine="true"/>
 
                 <com.lb.auto_fit_textview.AutoResizeTextView
                     android:layout_width="match_parent"
@@ -221,7 +242,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.5">
+        android:layout_weight="2.5"
+        android:layout_marginBottom="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -242,8 +264,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.5"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <com.lb.auto_fit_textview.AutoResizeTextView
+                   android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:textColor="@color/white"
                     android:text="30°C, 100%"
@@ -254,7 +276,10 @@
                     app:layout_constraintHeight_percent="0.25"
                     android:textSize="25sp"
                     android:gravity="center_vertical"
-                    android:id="@+id/tvDegree3"/>
+                    android:id="@+id/tvDegree3"
+
+                    android:ellipsize="none"
+                    android:singleLine="true"/>
 
                 <com.lb.auto_fit_textview.AutoResizeTextView
                     android:layout_width="match_parent"
@@ -294,7 +319,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.5"/>
 
-                <TextView
+                <com.lb.auto_fit_textview.AutoResizeTextView
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:textColor="@color/white"
@@ -306,7 +331,10 @@
                     app:layout_constraintHeight_percent="0.25"
                     android:textSize="25sp"
                     android:gravity="center_vertical"
-                    android:id="@+id/tvDegree4"/>
+                    android:id="@+id/tvDegree4"
+
+                    android:ellipsize="none"
+                    android:singleLine="true"/>
 
                 <com.lb.auto_fit_textview.AutoResizeTextView
                     android:layout_width="match_parent"
@@ -342,7 +370,7 @@
             android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:layout_marginTop="10dp"/>
+            android:id="@+id/btnSearch"/>
 
     </LinearLayout>
 </LinearLayout>

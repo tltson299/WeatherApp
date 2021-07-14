@@ -1,224 +1,232 @@
 package com.a19125063_19125119;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.a19125063_19125119.api.ApiService;
 import com.a19125063_19125119.weathermodel.WeatherDetail;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
+import com.google.gson.Gson;
 
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import cz.msebera.android.httpclient.Header;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    final String APP_ID = "74af5f28937af771771371d7d217498f";
-    final String WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather";
+    private SimpleDateFormat sdfNow = new SimpleDateFormat("E, dd/MM/yyyy");
+    private SimpleDateFormat sdf = new SimpleDateFormat("kk:mm dd/MM");
+    public static final String TAG = "DEBUG";
+    private static final String defaultCity = "Saigon";
 
-    final long MIN_TIME = 5000;
-    final float MIN_DISTANCE = 1000;
-    final int REQUEST_CODE = 101;
+    private ImageView imgWeatherIcon, imgWeatherIcon1, imgWeatherIcon2, imgWeatherIcon3, imgWeatherIcon4;
+    private TextView tvNow, tvCity, tvDate1, tvDate2, tvDate3, tvDate4, tvDegree, tvDegree1, tvDegree2, tvDegree3, tvDegree4, tvWeatherType;
+    private Button btnSearch;
 
-
-    String Location_Provider = LocationManager.GPS_PROVIDER;
-
-    TextView NameofCity, weatherState, Temperature;
-    ImageView mweatherIcon;
-
-    RelativeLayout mCityFinder;
-
-
-    LocationManager mLocationManager;
-    LocationListener mLocationListner;
+    private static SharedPreferences local;
+    private static boolean start = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        weatherState = findViewById(R.id.tvWeatherType);
-        Temperature = findViewById(R.id.tvDegree);
-        mweatherIcon = findViewById(R.id.imgWeatherIcon);
-        //mCityFinder = findViewById(R.id.cityFinder);
-        NameofCity = findViewById(R.id.tvCity);
+        local = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+        initViews();
 
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SearchAcitivty.class));
+                overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_left);
+            }
+        });
     }
+
+    private void initViews() {
+        btnSearch = findViewById(R.id.btnSearch);
+
+        tvNow = findViewById(R.id.tvNow);
+        tvCity = findViewById(R.id.tvCity);
+        tvWeatherType = findViewById(R.id.tvWeatherType);
+        tvDegree = findViewById(R.id.tvDegree);
+        tvDegree1 = findViewById(R.id.tvDegree1);
+        tvDegree2 = findViewById(R.id.tvDegree2);
+        tvDegree3 = findViewById(R.id.tvDegree3);
+        tvDegree4 = findViewById(R.id.tvDegree4);
+        tvDate1 = findViewById(R.id.tvDate1);
+        tvDate2 = findViewById(R.id.tvDate2);
+        tvDate3 = findViewById(R.id.tvDate3);
+        tvDate4 = findViewById(R.id.tvDate4);
+
+        imgWeatherIcon = findViewById(R.id.imgWeatherIcon);
+        imgWeatherIcon1 = findViewById(R.id.imgWeatherIcon1);
+        imgWeatherIcon2 = findViewById(R.id.imgWeatherIcon2);
+        imgWeatherIcon3 = findViewById(R.id.imgWeatherIcon3);
+        imgWeatherIcon4 = findViewById(R.id.imgWeatherIcon4);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
-        Intent mIntent=getIntent();
-        String city= mIntent.getStringExtra("City");
-        if(city!=null)
-        {
-            getWeatherForNewCity(city);
-        }
-        else
-        {
-            getWeatherForCurrentLocation();
-        }
 
-    }
-
-
-    private void getWeatherForNewCity(String city)
-    {
-        RequestParams params=new RequestParams();
-        params.put("q",city);
-        params.put("appid",APP_ID);
-        letsdoSomeNetworking(params);
-
-    }
-
-
-
-
-    private void getWeatherForCurrentLocation() {
-
-        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        mLocationListner = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-
-                String Latitude = String.valueOf(location.getLatitude());
-                String Longitude = String.valueOf(location.getLongitude());
-
-                RequestParams params =new RequestParams();
-                //params.put("lat" ,Latitude);
-                //params.put("lon",Longitude);
-                //This will get u to HCM City to cheat
-                params.put("lat" ,10.7752187);
-                params.put("lon",106.680853);
-                params.put("appid",APP_ID);
-                letsdoSomeNetworking(params);
-
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-                //not able to get location
-            }
-        };
-
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
-            return;
-        }
-        mLocationManager.requestLocationUpdates(Location_Provider, MIN_TIME, MIN_DISTANCE, mLocationListner);
-
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-
-        if(requestCode==REQUEST_CODE)
-        {
-            if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED)
-            {
-                Toast.makeText(MainActivity.this,"Get Location Successfully",Toast.LENGTH_SHORT).show();
-                getWeatherForCurrentLocation();
-            }
-            else
-            {
-                //user denied the permission
+        if(start)   {
+            getSelectedWeatherDetail(defaultCity);
+            start = false;
+        }else{
+            Intent intent = getIntent();
+            if (intent != null) {
+                if(!(intent.getBooleanExtra("searched", false)))    {
+                    setUpViews(new Gson().fromJson(local.getString("data", null), WeatherDetail.class));
+                }else{
+                    if(intent.getStringExtra("city") != null)  {
+                        getSelectedWeatherDetail(intent.getStringExtra("city"));
+                    }
+                }
             }
         }
-
-
     }
 
+    private void setUpViews(WeatherDetail detail)   {
+        Date now = new Date();
 
-    private  void letsdoSomeNetworking(RequestParams params)
-    {
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(WEATHER_URL,params,new JsonHttpResponseHandler()
-        {
+        tvNow.setText(sdfNow.format(now));
+
+        tvCity.setText(detail.city.name);
+
+        tvWeatherType.setText(detail.list.get(0).weather.get(0).description.substring(0, 1).toUpperCase()+detail.list.get(0).weather.get(0).description.substring(1));
+
+        imgWeatherIcon.setImageResource(getResources().getIdentifier(updateWeatherIcon(detail.list.get(0).weather.get(0).id), "drawable", getPackageName()));
+        imgWeatherIcon1.setImageResource(getResources().getIdentifier(updateWeatherIcon(detail.list.get(1).weather.get(0).id), "drawable", getPackageName()));
+        imgWeatherIcon2.setImageResource(getResources().getIdentifier(updateWeatherIcon(detail.list.get(2).weather.get(0).id), "drawable", getPackageName()));
+        imgWeatherIcon3.setImageResource(getResources().getIdentifier(updateWeatherIcon(detail.list.get(3).weather.get(0).id), "drawable", getPackageName()));
+        imgWeatherIcon4.setImageResource(getResources().getIdentifier(updateWeatherIcon(detail.list.get(4).weather.get(0).id), "drawable", getPackageName()));
+
+        tvDegree.setText(String.valueOf(withMathRound(detail.list.get(0).main.feels_like, 1))+"°C, "+String.valueOf(detail.list.get(0).main.humidity)+"%");
+        tvDegree1.setText(String.valueOf(withMathRound(detail.list.get(1).main.feels_like, 1))+"°C, "+String.valueOf(detail.list.get(1).main.humidity)+"%");
+        tvDegree2.setText(String.valueOf(withMathRound(detail.list.get(2).main.feels_like, 1))+"°C, "+String.valueOf(detail.list.get(2).main.humidity)+"%");
+        tvDegree3.setText(String.valueOf(withMathRound(detail.list.get(3).main.feels_like, 1))+"°C, "+String.valueOf(detail.list.get(3).main.humidity)+"%");
+        tvDegree4.setText(String.valueOf(withMathRound(detail.list.get(4).main.feels_like, 1))+"°C, "+String.valueOf(detail.list.get(4).main.humidity)+"%");
+
+        tvDate1.setText(sdf.format(new Date(detail.list.get(1).dt*1000L)));
+        tvDate2.setText(sdf.format(new Date(detail.list.get(2).dt*1000L)));
+        tvDate3.setText(sdf.format(new Date(detail.list.get(3).dt*1000L)));
+        tvDate4.setText(sdf.format(new Date(detail.list.get(4).dt*1000L)));
+    }
+
+    public static double withMathRound(double value, int places) {
+        double scale = Math.pow(10, places);
+        return Math.round(value * scale) / scale;
+    }
+
+    private void getSelectedWeatherDetail(String city) {
+
+        ApiService.apiService.getWeather(city, "metric", 5,"b9c9cb24ed8b56758aa8f6788235bd09").enqueue(new Callback<WeatherDetail>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            public void onResponse(Call<WeatherDetail> call, Response<WeatherDetail> response) {
+                WeatherDetail detail = response.body();
 
-                Toast.makeText(MainActivity.this,"Get Data Success",Toast.LENGTH_SHORT).show();
+                if(detail == null)  {
+                    Log.d(TAG, "onResponse: detail = null");
+                    Log.d(TAG, "onResponse: "+new Gson().fromJson(local.getString("data", null), WeatherDetail.class).city.name);
+                    detail = new Gson().fromJson(local.getString("data", null), WeatherDetail.class);
 
-                weatherData weatherD=weatherData.fromJson(response);
-                updateUI(weatherD);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setMessage("Can not find "+city+".")
+                            .setPositiveButton("Ok", null)
+                            .show();
+                }else   {
+                    String data = new Gson().toJson(detail);
+                    local.edit().putString("data", data).commit();
+                }
 
-
-                // super.onSuccess(statusCode, headers, response);
+                setUpViews(detail);
             }
 
-
             @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                //super.onFailure(statusCode, headers, throwable, errorResponse);
+            public void onFailure(Call<WeatherDetail> call, Throwable t) {
+                Log.d("DEBUG", t.getMessage());
             }
         });
 
 
-
     }
 
-    private  void updateUI(weatherData weather){
-
-
-        Temperature.setText(weather.getmTemperature());
-        NameofCity.setText(weather.getMcity());
-        weatherState.setText(weather.getmWeatherType());
-        int resourceID=getResources().getIdentifier(weather.getMicon(),"drawable",getPackageName());
-        mweatherIcon.setImageResource(resourceID);
-
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if(mLocationManager!=null)
+    private static String updateWeatherIcon(int condition)
+    {
+        if(condition>=0 && condition<=300)
         {
-            mLocationManager.removeUpdates(mLocationListner);
+            return "thunderstrom1";
         }
+        else if(condition>=300 && condition<=500)
+        {
+            return "lightrain";
+        }
+        else if(condition>=500 && condition<=600)
+        {
+            return "shower";
+        }
+        else  if(condition>=600 && condition<=700)
+        {
+            return "snow2";
+        }
+        else if(condition>=701 && condition<=771)
+        {
+            return "fog";
+        }
+
+        else if(condition>=772 && condition<=800)
+        {
+            return "overcast";
+        }
+        else if(condition==800)
+        {
+            return "sunny";
+        }
+        else if(condition>=801 && condition<=804)
+        {
+            return "cloudy";
+        }
+        else  if(condition>=900 && condition<=902)
+        {
+            return "thunderstrom1";
+        }
+        if(condition==903)
+        {
+            return "snow1";
+        }
+        if(condition==904)
+        {
+            return "sunny";
+        }
+        if(condition>=905 && condition<=1000)
+        {
+            return "thunderstrom2";
+        }
+
+        return "dunno";
+
+
+    }
+
+    public void intentToWebsite(View view)   {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("https://openweathermap.org"));
+        startActivity(intent);
     }
 }
 
