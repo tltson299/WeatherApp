@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
     {
         if(condition>=0 && condition<=300)
         {
-            return "thunderstrom1";
+            return "thunderstorm1";
         }
         else if(condition>=300 && condition<=500)
         {
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else  if(condition>=600 && condition<=700)
         {
-            return "snow2";
+            return "snow1";
         }
         else if(condition>=701 && condition<=771)
         {
@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else  if(condition>=900 && condition<=902)
         {
-            return "thunderstrom1";
+            return "thunderstorm1";
         }
         if(condition==903)
         {
@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if(condition>=905 && condition<=1000)
         {
-            return "thunderstrom2";
+            return "thunderstorm1";
         }
 
         return "dunno";
